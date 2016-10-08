@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "lint": "eslint ./ --ext .js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": "rickharrison/micro-json-error",
   "keywords": [
@@ -29,7 +29,19 @@
   },
   "devDependencies": {
     "@meadow/eslint-config": "^2.0.0",
+    "async-to-gen": "^1.1.4",
+    "ava": "^0.16.0",
     "babel-eslint": "^7.0.0",
-    "eslint": "^3.6.1"
+    "eslint": "^3.6.1",
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.js"
+    ],
+    "require": [
+      "async-to-gen/register"
+    ]
   }
 }
