@@ -1,0 +1,35 @@
+{
+  "name": "micro-json-error",
+  "version": "1.0.0",
+  "description": "Outputs errors from your micro service in JSON.",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint ./ --ext .js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "rickharrison/micro-json-error",
+  "keywords": [
+    "micro",
+    "microservice",
+    "error",
+    "onError",
+    "json"
+  ],
+  "author": "Rick Harrison",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rickharrison/micro-json-error/issues"
+  },
+  "homepage": "https://github.com/rickharrison/micro-json-error",
+  "peerDependencies": {
+    "micro": "^6.1.0"
+  },
+  "devDependencies": {
+    "@meadow/eslint-config": "^2.0.0",
+    "babel-eslint": "^7.0.0",
+    "eslint": "^3.6.1"
+  }
+}
