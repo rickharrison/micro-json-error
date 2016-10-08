@@ -114,3 +114,24 @@ test('should display unknown errors as 500', async (t) => {
     message: 'foo bar error'
   });
 });
+
+test('should display unknown messages as 500', async (t) => {
+  const fn = () => {
+    /* eslint no-throw-literal: 0 */
+
+    throw 'foobar';
+  };
+
+  const url = await listen(fn);
+  const response = await request(url, {
+    json: true,
+    resolveWithFullResponse: true,
+    simple: false
+  });
+
+  t.is(response.statusCode, 500);
+  t.deepEqual(response.body, {
+    statusCode: 500,
+    message: 'Internal Server Error'
+  });
+});

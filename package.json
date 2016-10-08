@@ -7,6 +7,7 @@
     "index.js"
   ],
   "scripts": {
+    "cover": "nyc ava",
     "lint": "eslint ./ --ext .js",
     "test": "ava"
   },
@@ -33,6 +34,7 @@
     "ava": "^0.16.0",
     "babel-eslint": "^7.0.0",
     "eslint": "^3.6.1",
+    "nyc": "^8.3.1",
     "request": "^2.75.0",
     "request-promise": "^4.1.1"
   },
@@ -42,6 +44,11 @@
     ],
     "require": [
       "async-to-gen/register"
+    ]
+  },
+  "nyc": {
+    "include": [
+      "index.js"
     ]
   }
 }
