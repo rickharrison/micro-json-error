@@ -7,8 +7,8 @@ const request = require('request-promise');
 
 const jsonError = require('../');
 
-const listen = function (fn) {
-  const server = micro(jsonError(fn));
+const listen = function (fn, options) {
+  const server = micro(jsonError(fn, options));
 
   return new Promise(function (resolve, reject) {
     server.listen(function (err) {
@@ -133,5 +133,50 @@ test('should display unknown messages as 500', async (t) => {
   t.deepEqual(response.body, {
     statusCode: 500,
     message: 'Internal Server Error'
+  });
+});
+
+test('should use httpStatusCode override', async (t) => {
+  const fn = () => {
+    throw createError(404, 'Resource not found');
+  };
+
+  const url = await listen(fn, { httpStatusCode: 201 });
+  const response = await request(url, {
+    json: true,
+    resolveWithFullResponse: true,
+    simple: false
+  });
+
+  t.is(response.statusCode, 201);
+  t.deepEqual(response.body, {
+    statusCode: 404,
+    message: 'Resource not found'
+  });
+});
+
+test('should call the error callback', async (t) => {
+  t.plan(4);
+
+  const fn = () => {
+    throw createError(405, 'Method not allowed');
+  };
+
+  const onError = ({ statusCode, message }) => {
+    t.is(statusCode, 405);
+    t.is(message, 'Method not allowed');
+  };
+
+  const url = await listen(fn, { httpStatusCode: 201, onError });
+  const response = await request(url, {
+    json: true,
+    resolveWithFullResponse: true,
+    simple: false
+  });
+
+  t.is(response.statusCode, 201);
+  t.deepEqual(response.body, {
+    statusCode: 405,
+    message: 'Method not allowed'
   });
 });
