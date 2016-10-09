@@ -1,6 +1,6 @@
 {
   "name": "micro-json-error",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Outputs errors from your micro service in JSON.",
   "main": "index.js",
   "files": [
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/rickharrison/micro-json-error",
   "peerDependencies": {
-    "micro": "^6.1.0"
+    "micro": "^6.0.0"
   },
   "devDependencies": {
     "@meadow/eslint-config": "^2.0.0",
